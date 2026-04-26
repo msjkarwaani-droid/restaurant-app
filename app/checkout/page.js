@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect } from 'react'; // 👈 Added useEffect
+import { useState, useEffect } from 'react';
 import { useCart } from '@/context/CartContext';
 import { supabase } from '@/lib/supabaseClient';
 import { useRouter } from 'next/navigation';
-import Link from 'next/link'; // 👈 Added Link for the back button
-import toast from 'react-hot-toast'; // 👈 Import toast
+import Link from 'next/link';
+import toast from 'react-hot-toast';
+import { motion } from 'framer-motion'; // 👈 Import motion
 
 export default function CheckoutPage() {
   const { cart, total, clearCart } = useCart();
@@ -18,14 +19,12 @@ export default function CheckoutPage() {
   });
   const [loading, setLoading] = useState(false);
 
-  // 👇 Use useEffect to handle the redirect safely
   useEffect(() => {
     if (cart.length === 0) {
       router.push('/');
     }
   }, [cart, router]);
 
-  // If cart is empty, show nothing while redirecting
   if (cart.length === 0) {
     return null;
   }
@@ -52,20 +51,26 @@ export default function CheckoutPage() {
 
       if (error) throw error;
 
-      toast('Order placed successfully! We will contact you shortly.');
+      toast.success('Order placed successfully!');
       clearCart();
       router.push('/');
 
     } catch (err) {
       console.error(err);
-      toast('Error placing order: ' + err.message);
+      toast.error('Error placing order: ' + err.message);
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="max-w-2xl mx-auto">
+    /* 👇 Wrap everything in motion.div for fade-in */
+    <motion.div 
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className="max-w-2xl mx-auto"
+    >
       <div className="flex items-center gap-4 mb-6">
         <Link href="/cart" className="text-gray-500 hover:text-orange-600 flex items-center gap-1">
           ← Back to Cart
@@ -100,7 +105,7 @@ export default function CheckoutPage() {
               value={formData.name} 
               onChange={handleChange} 
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none text-base"
+              className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
               placeholder="John Doe"
             />
           </div>
@@ -113,7 +118,7 @@ export default function CheckoutPage() {
               value={formData.phone} 
               onChange={handleChange} 
               required
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none text-base"
+              className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
               placeholder="+1 234 567 890"
             />
           </div>
@@ -126,7 +131,7 @@ export default function CheckoutPage() {
               onChange={handleChange} 
               required
               rows="3"
-              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none resize-none text-base"
+              className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none resize-none"
               placeholder="123 Food Street, Tasty City"
             ></textarea>
           </div>
@@ -140,6 +145,6 @@ export default function CheckoutPage() {
           </button>
         </form>
       </div>
-    </div>
+    </motion.div>
   );
 }

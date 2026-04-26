@@ -24,7 +24,7 @@ export default function CartPage() {
   }
 
   return (
-    <div className="max-w-4xl mx-auto">
+    <div className="min-h-screen w-full bg-pattern-cart">
       <h1 className="text-3xl font-bold text-gray-800 mb-6">Your Cart</h1>
       
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">

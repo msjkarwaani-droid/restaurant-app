@@ -7,6 +7,10 @@ import AdminPanel from "@/components/AdminPanel";
 import AddDishModal from "@/components/AddDishModal";
 import AdminLoginModal from "@/components/AdminLoginModal";
 import toast from "react-hot-toast"; // 👈 Import toast
+import { useEffect, useState, useRef } from 'react';
+
+// for login timer Admin
+const logoutTimer = useRef(null);
 
 // 👇 CHANGE THIS TO YOUR ACTUAL ADMIN EMAIL
 const ADMIN_EMAIL = "shoaibjami71@gmail.com";
@@ -27,6 +31,38 @@ export default function AdminPage() {
   useEffect(() => {
     checkAuth();
   }, []);
+    // 👇 Auto-logout after 30 minutes of inactivity
+  useEffect(() => {
+    if (!user) return;
+
+    const handleActivity = () => {
+      // Reset timer on any click or keypress
+      clearTimeout(logoutTimer.current);
+      logoutTimer.current = setTimeout(async () => {
+        console.log("Session expired due to inactivity");
+        await supabase.auth.signOut();
+        setUser(null);
+        setShowLoginModal(true);
+        toast.error("Session expired. Please log in again.");
+      }, 30 * 60 * 1000); // 30 minutes
+    };
+
+    // Listen for user activity
+    window.addEventListener('mousemove', handleActivity);
+    window.addEventListener('keydown', handleActivity);
+    window.addEventListener('click', handleActivity);
+
+    // Initial timer set
+    handleActivity();
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('mousemove', handleActivity);
+      window.removeEventListener('keydown', handleActivity);
+      window.removeEventListener('click', handleActivity);
+      if (logoutTimer.current) clearTimeout(logoutTimer.current);
+    };
+  }, [user]);
 
   const checkAuth = async () => {
     const { data } = await supabase.auth.getSession();

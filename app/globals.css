@@ -19,20 +19,82 @@
   }
 }
 
+html, body {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
   font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
-  /* Prevent horizontal scroll on mobile */
-  overflow-x: hidden;
 }
 
-/* Optional: Smooth scrolling for anchor links */
 html {
   scroll-behavior: smooth;
 }
 
-/* Optional: Improve tap targets on mobile */
-button, a, input, textarea, select {
-  touch-action: manipulation;
+/* --- CUSTOM BACKGROUNDS --- */
+
+/* Option 2: Soft Orange Gradient (For Menu) */
+.bg-gradient-menu {
+  position: relative;
+  z-index: 1;
+}
+
+.bg-gradient-menu::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: radial-gradient(circle at top right, #fff7ed 0%, #ffffff 40%),
+              radial-gradient(circle at bottom left, #ffedd5 0%, #ffffff 40%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Option 3: Immersive Food Background (For Track Order) */
+.bg-immersive-track {
+  position: relative;
+  z-index: 1;
+}
+
+.bg-immersive-track::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-image: url('https://images.unsplash.com/photo-1498837167922-ddd27525d352?q=80&w=2070&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  z-index: -2;
+  pointer-events: none;
+}
+
+.bg-immersive-track::after {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Option 1: Subtle Pattern (For Cart) */
+.bg-pattern-cart {
+  position: relative;
+  z-index: 1;
+}
+
+.bg-pattern-cart::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #f9fafb;
+  background-image: radial-gradient(#e5e7eb 1px, transparent 1px);
+  background-size: 24px 24px;
+  z-index: -1;
+  pointer-events: none;
 }

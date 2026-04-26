@@ -29,7 +29,7 @@ export default function RootLayout({ children }) {
         {/* 👇 Wrap everything in CartProvider */}
         <CartProvider>
           <Navbar />
-          <main className="flex-1 container mx-auto p-4">
+          <main className="flex-1 container mx-auto p-4 pt-24">
             {children}
           </main>
           <footer className="bg-gray-800 text-white py-6 mt-auto">
