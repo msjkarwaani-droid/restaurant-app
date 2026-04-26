@@ -1,6 +1,6 @@
 "use client";
 
-// 👇 MERGE ALL REACT IMPORTS INTO ONE LINE
+// 👇 ONLY ONE IMPORT LINE FOR REACT HOOKS
 import { useEffect, useState, useRef } from 'react'; 
 
 import { supabase } from '@/lib/supabaseClient';
@@ -23,7 +23,11 @@ export default function AdminPage() {
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   const router = useRouter();
-  const logoutTimer = useRef(null); // 👈 Define ref here inside the component
+  
+  // 👇 useRef MUST be inside the component function
+  const logoutTimer = useRef(null); 
+
+  // ... rest of your code ...
 
   // ... rest of the code ...
 
