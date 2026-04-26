@@ -1,6 +1,8 @@
-"use client"; // 👈 MUST be the first line
+"use client";
 
-import { useEffect, useState, useRef } from 'react';
+// 👇 MERGE ALL REACT IMPORTS INTO ONE LINE
+import { useEffect, useState, useRef } from 'react'; 
+
 import { supabase } from '@/lib/supabaseClient';
 import { useRouter } from 'next/navigation';
 import AdminPanel from "@/components/AdminPanel";
@@ -21,7 +23,9 @@ export default function AdminPage() {
   const [showLoginModal, setShowLoginModal] = useState(false);
 
   const router = useRouter();
-  const logoutTimer = useRef(null);
+  const logoutTimer = useRef(null); // 👈 Define ref here inside the component
+
+  // ... rest of the code ...
 
   // 👇 Check Auth and Fetch Data ONLY on Client Mount
   useEffect(() => {
