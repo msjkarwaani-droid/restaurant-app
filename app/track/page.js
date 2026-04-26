@@ -77,7 +77,7 @@ export default function TrackOrderPage() {
         <button 
           type="submit" 
           disabled={loading}
-          className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-lg font-bold transition flex items-center gap-2"
+          className="bg-orange-600 hover:bg-orange-700 text-white px-6 py-3 rounded-lg font-bold transition flex items-center justify-center gap-2 w-full sm:w-auto"
         >
           {loading ? 'Searching...' : <><Search size={18} /> Track</>}
         </button>

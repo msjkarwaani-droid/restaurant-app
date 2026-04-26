@@ -14,7 +14,7 @@ export default function AddDishModal({ isOpen, onClose, initialData }) {
     is_available: true,
     image_url: ''
   });
-  
+
   const [file, setFile] = useState(null);
   const [previewUrl, setPreviewUrl] = useState('');
   const [loading, setLoading] = useState(false);
@@ -140,7 +140,7 @@ export default function AddDishModal({ isOpen, onClose, initialData }) {
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
       <div className="bg-white rounded-xl shadow-2xl w-full max-w-lg overflow-hidden">
-        
+
         {/* Header */}
         <div className="flex justify-between items-center p-4 border-b border-gray-100">
           <h2 className="text-xl font-bold text-gray-800">
@@ -153,7 +153,7 @@ export default function AddDishModal({ isOpen, onClose, initialData }) {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="p-6 space-y-4">
-          
+
           {/* Image Upload */}
           <div className="flex flex-col items-center gap-2 mb-4">
             <div className="relative w-24 h-24 rounded-lg overflow-hidden bg-gray-100 border border-gray-200">
@@ -174,11 +174,11 @@ export default function AddDishModal({ isOpen, onClose, initialData }) {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Dish Name</label>
-            <input 
-              type="text" 
-              name="name" 
-              value={formData.name} 
-              onChange={handleChange} 
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
               placeholder="e.g. Margherita Pizza"
@@ -188,9 +188,9 @@ export default function AddDishModal({ isOpen, onClose, initialData }) {
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Category</label>
-              <select 
-                name="category" 
-                value={formData.category} 
+              <select
+                name="category"
+                value={formData.category}
                 onChange={handleChange}
                 className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none bg-white"
               >
@@ -202,12 +202,12 @@ export default function AddDishModal({ isOpen, onClose, initialData }) {
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Price ($)</label>
-              <input 
-                type="number" 
+              <input
+                type="number"
                 step="0.01"
-                name="price" 
-                value={formData.price} 
-                onChange={handleChange} 
+                name="price"
+                value={formData.price}
+                onChange={handleChange}
                 required
                 className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
                 placeholder="0.00"
@@ -217,10 +217,10 @@ export default function AddDishModal({ isOpen, onClose, initialData }) {
 
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-1">Description</label>
-            <textarea 
-              name="description" 
-              value={formData.description} 
-              onChange={handleChange} 
+            <textarea
+              name="description"
+              value={formData.description}
+              onChange={handleChange}
               rows="3"
               className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none resize-none"
               placeholder="Short description of ingredients..."
@@ -228,18 +228,18 @@ export default function AddDishModal({ isOpen, onClose, initialData }) {
           </div>
 
           <div className="flex items-center gap-2">
-            <input 
-              type="checkbox" 
-              name="is_available" 
-              checked={formData.is_available} 
+            <input
+              type="checkbox"
+              name="is_available"
+              checked={formData.is_available}
               onChange={handleChange}
               className="w-4 h-4 text-orange-600 rounded focus:ring-orange-500"
             />
             <span className="text-sm text-gray-700">Available for ordering</span>
           </div>
 
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             disabled={loading || uploading}
             className="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 rounded-lg transition disabled:opacity-50 disabled:cursor-not-allowed mt-2"
           >

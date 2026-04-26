@@ -34,9 +34,9 @@ const handleAddToCart = () => {
       </div>
 
       {/* Content Area */}
-      <div className="p-4 flex-1 flex flex-col">
+      <div className="p-4 flex-1 flex flex-col min-w-0">
         <div className="flex justify-between items-start mb-2">
-          <h3 className="text-xl font-bold text-gray-800">{dish.name}</h3>
+          <h3 className="text-xl font-bold text-gray-800 truncate">{dish.name}</h3>
           <span className="text-orange-600 font-bold text-lg">${dish.price}</span>
         </div>
         

@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import AdminPanel from "@/components/AdminPanel";
 import AddDishModal from "@/components/AddDishModal";
 import AdminLoginModal from "@/components/AdminLoginModal";
-import toast from 'react-hot-toast'; // 👈 Import toast
+import toast from "react-hot-toast"; // 👈 Import toast
 
 // 👇 CHANGE THIS TO YOUR ACTUAL ADMIN EMAIL
 const ADMIN_EMAIL = "shoaibjami71@gmail.com";
@@ -17,7 +17,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingDish, setEditingDish] = useState(null);
-  
+
   // Auth State
   const [user, setUser] = useState(null);
   const [showLoginModal, setShowLoginModal] = useState(false);
@@ -74,7 +74,7 @@ export default function AdminPage() {
     await supabase.auth.signOut();
     setUser(null);
     setShowLoginModal(true);
-    router.push('/');
+    router.push("/");
   };
 
   const handleAddNew = () => {
@@ -111,11 +111,13 @@ export default function AdminPage() {
       toast.error("Failed to update status: " + error.message);
     } else {
       // Update local state immediately for better UX
-      setOrders(orders.map(order => 
-        order.id === orderId ? { ...order, status: newStatus } : order
-      ));
+      setOrders(
+        orders.map((order) =>
+          order.id === orderId ? { ...order, status: newStatus } : order,
+        ),
+      );
       toast.success(`Order status updated to ${newStatus}!`);
-      
+
       // TODO: Trigger Email/SMS Notification here later
     }
   };
@@ -137,12 +139,12 @@ export default function AdminPage() {
             <h1 className="text-3xl font-bold text-gray-800">
               Admin Dashboard
             </h1>
-            
+
             <div className="flex items-center gap-4">
               <span className="text-sm text-gray-500 hidden md:block">
                 Logged in as: {user.email}
               </span>
-              
+
               <button
                 onClick={handleLogout}
                 className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg font-semibold transition text-sm"
@@ -161,13 +163,17 @@ export default function AdminPage() {
 
           {/* 👇 Section 1: Manage Orders */}
           <div className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-700 mb-4 border-b pb-2">Recent Orders</h2>
+            <h2 className="text-2xl font-bold text-gray-700 mb-4 border-b pb-2">
+              Recent Orders
+            </h2>
             <div className="overflow-x-auto bg-white rounded-xl shadow-sm border border-gray-100">
               <table className="w-full text-left">
                 <thead className="bg-gray-50 border-b border-gray-200">
                   <tr>
                     <th className="p-4 font-semibold text-gray-600">ID</th>
-                    <th className="p-4 font-semibold text-gray-600">Customer</th>
+                    <th className="p-4 font-semibold text-gray-600">
+                      Customer
+                    </th>
                     <th className="p-4 font-semibold text-gray-600">Total</th>
                     <th className="p-4 font-semibold text-gray-600">Status</th>
                     <th className="p-4 font-semibold text-gray-600">Action</th>
@@ -175,28 +181,48 @@ export default function AdminPage() {
                 </thead>
                 <tbody className="divide-y divide-gray-100">
                   {orders.length === 0 ? (
-                    <tr><td colSpan="5" className="p-4 text-center text-gray-500">No orders yet.</td></tr>
+                    <tr>
+                      <td colSpan="5" className="p-4 text-center text-gray-500">
+                        No orders yet.
+                      </td>
+                    </tr>
                   ) : (
                     orders.map((order) => (
                       <tr key={order.id} className="hover:bg-gray-50">
-                        <td className="p-4 text-xs text-gray-500">{order.id.slice(0, 8)}...</td>
-                        <td className="p-4">
-                          <div className="font-medium">{order.customer_name}</div>
-                          <div className="text-xs text-gray-500">{order.customer_phone}</div>
+                        <td className="p-4 text-xs text-gray-500">
+                          {order.id.slice(0, 8)}...
                         </td>
-                        <td className="p-4 font-bold">${order.total_amount.toFixed(2)}</td>
                         <td className="p-4">
-                          <span className={`px-2 py-1 rounded-full text-xs font-bold capitalize
-                            ${order.status === 'delivered' ? 'bg-green-100 text-green-800' : 
-                              order.status === 'preparing' ? 'bg-blue-100 text-blue-800' : 
-                              'bg-yellow-100 text-yellow-800'}`}>
+                          <div className="font-medium">
+                            {order.customer_name}
+                          </div>
+                          <div className="text-xs text-gray-500">
+                            {order.customer_phone}
+                          </div>
+                        </td>
+                        <td className="p-4 font-bold">
+                          ${order.total_amount.toFixed(2)}
+                        </td>
+                        <td className="p-4">
+                          <span
+                            className={`px-2 py-1 rounded-full text-xs font-bold capitalize
+                            ${
+                              order.status === "delivered"
+                                ? "bg-green-100 text-green-800"
+                                : order.status === "preparing"
+                                  ? "bg-blue-100 text-blue-800"
+                                  : "bg-yellow-100 text-yellow-800"
+                            }`}
+                          >
                             {order.status}
                           </span>
                         </td>
                         <td className="p-4">
-                          <select 
+                          <select
                             value={order.status}
-                            onChange={(e) => handleStatusChange(order.id, e.target.value)}
+                            onChange={(e) =>
+                              handleStatusChange(order.id, e.target.value)
+                            }
                             className="border border-gray-300 rounded p-1 text-sm focus:ring-2 focus:ring-orange-500 outline-none"
                           >
                             <option value="pending">Pending</option>
@@ -214,7 +240,9 @@ export default function AdminPage() {
 
           {/* 👇 Section 2: Manage Dishes */}
           <div>
-            <h2 className="text-2xl font-bold text-gray-700 mb-4 border-b pb-2">Menu Items</h2>
+            <h2 className="text-2xl font-bold text-gray-700 mb-4 border-b pb-2">
+              Menu Items
+            </h2>
             <AdminPanel
               dishes={dishes}
               onEdit={handleEdit}

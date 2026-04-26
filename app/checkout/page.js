@@ -100,7 +100,7 @@ export default function CheckoutPage() {
               value={formData.name} 
               onChange={handleChange} 
               required
-              className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none text-base"
               placeholder="John Doe"
             />
           </div>
@@ -113,7 +113,7 @@ export default function CheckoutPage() {
               value={formData.phone} 
               onChange={handleChange} 
               required
-              className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none text-base"
               placeholder="+1 234 567 890"
             />
           </div>
@@ -126,7 +126,7 @@ export default function CheckoutPage() {
               onChange={handleChange} 
               required
               rows="3"
-              className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none resize-none"
+              className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-orange-500 outline-none resize-none text-base"
               placeholder="123 Food Street, Tasty City"
             ></textarea>
           </div>
